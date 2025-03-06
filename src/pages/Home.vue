@@ -58,7 +58,6 @@ watch(searchQuery, () => {
       </router-link>
     </div>
 
-
     <p v-if="isLoading || isFetching">
       <div class="col-span-2 row-span-5">
         <SkeletonLoader />
@@ -66,10 +65,9 @@ watch(searchQuery, () => {
     </p>
     <p v-else-if="error">Error: {{ error.message }}</p>
 
-    <div v-else-if="data?.articles?.length" class="grid grid-cols-4 gap-x-4">
-
-      <div class="col-span-2 row-span-5 space-y-4">
-        <!-- First Large Block - Artikel Utama -->
+    <div v-else-if="data?.articles?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Artikel Utama -->
+      <div class="md:col-span-2 lg:col-span-2 row-span-5 space-y-4">
         <div v-if="data.articles[0]" class="space-y-2">
           <a v-if="data?.articles?.[0]" :href="data.articles[0].url" rel="noopener noreferrer" target="_blank"
             @click="saveReadListToLocalStorage(data.articles[0])">
@@ -81,7 +79,7 @@ watch(searchQuery, () => {
             <span>{{ formatTime(data.articles[0].publishedAt) }}</span>
           </div>
           <div class="flex flex-col space-y-2">
-            <a v-if="data?.articles?.[0]" :href="data.articles[0].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[0])">
+            <a :href="data.articles[0].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[0])">
               <h1 class="text-2xl font-bold title">{{ data.articles[0].title }}</h1>
             </a>
             <p class="text-sm text-gray-600 paragraph">{{ data.articles[0].description }}</p>
@@ -90,10 +88,10 @@ watch(searchQuery, () => {
         </div>
       </div>
 
-      <!-- Next 4 Articles (2 Top Rows, 2 Bottom Rows) -->
+      <!-- Artikel Kecil -->
       <template v-for="(article, index) in data.articles.slice(1, 5)" :key="index">
-        <div class="col-span-1 row-span-2 space-y-2 mb-6">
-          <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
+        <div class="col-span-1 space-y-2 mb-6">
+          <a :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
             <img :src="article.urlToImage" class="rounded-xl w-full h-32 object-cover">
           </a>
           <div class="flex text-xs text-gray-400 space-x-2 mt-2">
@@ -102,7 +100,7 @@ watch(searchQuery, () => {
             <span>{{ formatTime(article.publishedAt) }}</span>
           </div>
           <div class="space-y-1.5">
-            <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
+            <a :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
               <h1 class="text-lg font-bold title">{{ article.title }}</h1>
             </a>
             <p class="text-sm text-gray-600 paragraph">{{ article.description }}</p>
@@ -111,10 +109,10 @@ watch(searchQuery, () => {
         </div>
       </template>
 
-      <!-- Right Side Large Block (Artikel ke-5) -->
-      <div class="col-span-2 row-span-5 space-y-4 col-start-3">
+      <!-- Artikel Besar Kedua -->
+      <div class="md:col-span-2 lg:col-span-2 row-span-5 space-y-4">
         <div v-if="data.articles[5]" class="space-y-2">
-          <a v-if="data?.articles?.[5]" :href="data.articles[5].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[5].url)">
+          <a :href="data.articles[5].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[5])">
             <img :src="data.articles[5].urlToImage" class="rounded-xl w-full h-60 object-cover">
           </a>
           <div class="flex text-xs text-gray-400 space-x-2 mt-2">
@@ -122,7 +120,7 @@ watch(searchQuery, () => {
             <span>&#x2022;</span>
             <span>{{ formatTime(data.articles[5].publishedAt) }}</span>
           </div>
-          <a v-if="data?.articles?.[5]" :href="data.articles[5].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[5].url)">
+          <a :href="data.articles[5].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[5])">
             <h1 class="text-xl font-bold">{{ data.articles[5].title }}</h1>
           </a>
           <p class="text-sm text-gray-600 paragraph">{{ data.articles[5].description }}</p>
@@ -130,10 +128,10 @@ watch(searchQuery, () => {
         </div>
       </div>
 
-      <!-- Bottom 4 Articles (under right block) -->
+      <!-- Artikel Bawah -->
       <template v-for="(article, index) in data.articles.slice(6, 10)" :key="index">
-        <div class="col-span-1 row-span-2 space-y-2 mb-6">
-          <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
+        <div class="col-span-1 space-y-2 mb-6">
+          <a :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
             <img :src="article.urlToImage" class="rounded-xl w-full h-32 object-cover">
           </a>
           <div class="flex text-xs text-gray-400 space-x-2 mt-2">
@@ -142,7 +140,7 @@ watch(searchQuery, () => {
             <span>{{ formatTime(article.publishedAt) }}</span>
           </div>
           <div class="space-y-1.5">
-            <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
+            <a :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
               <h1 class="text-lg font-bold title">{{ article.title }}</h1>
             </a>
             <p class="text-sm text-gray-600 paragraph">{{ article.description }}</p>
@@ -150,10 +148,10 @@ watch(searchQuery, () => {
           </div>
         </div>
       </template>
-
     </div>
     <p v-else-if="!isLoading && !error">No articles found.</p>
   </div>
 </template>
+
 
 <style scoped></style>
