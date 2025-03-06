@@ -81,7 +81,7 @@ watch(searchQuery, () => {
             <span>{{ formatTime(data.articles[0].publishedAt) }}</span>
           </div>
           <div class="flex flex-col space-y-2">
-            <a v-if="data?.articles?.[0]" :href="data.articles[0].url" rel="noopener noreferrer">
+            <a v-if="data?.articles?.[0]" :href="data.articles[0].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[0])">
               <h1 class="text-2xl font-bold title">{{ data.articles[0].title }}</h1>
             </a>
             <p class="text-sm text-gray-600 paragraph">{{ data.articles[0].description }}</p>
@@ -93,7 +93,7 @@ watch(searchQuery, () => {
       <!-- Next 4 Articles (2 Top Rows, 2 Bottom Rows) -->
       <template v-for="(article, index) in data.articles.slice(1, 5)" :key="index">
         <div class="col-span-1 row-span-2 space-y-2 mb-6">
-          <a v-if="article" :href="article.url" rel="noopener noreferrer">
+          <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
             <img :src="article.urlToImage" class="rounded-xl w-full h-32 object-cover">
           </a>
           <div class="flex text-xs text-gray-400 space-x-2 mt-2">
@@ -102,7 +102,7 @@ watch(searchQuery, () => {
             <span>{{ formatTime(article.publishedAt) }}</span>
           </div>
           <div class="space-y-1.5">
-            <a v-if="article" :href="article.url" rel="noopener noreferrer">
+            <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
               <h1 class="text-lg font-bold title">{{ article.title }}</h1>
             </a>
             <p class="text-sm text-gray-600 paragraph">{{ article.description }}</p>
@@ -114,7 +114,7 @@ watch(searchQuery, () => {
       <!-- Right Side Large Block (Artikel ke-5) -->
       <div class="col-span-2 row-span-5 space-y-4 col-start-3">
         <div v-if="data.articles[5]" class="space-y-2">
-          <a v-if="data?.articles?.[5]" :href="data.articles[5].url" rel="noopener noreferrer">
+          <a v-if="data?.articles?.[5]" :href="data.articles[5].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[5].url)">
             <img :src="data.articles[5].urlToImage" class="rounded-xl w-full h-60 object-cover">
           </a>
           <div class="flex text-xs text-gray-400 space-x-2 mt-2">
@@ -122,7 +122,7 @@ watch(searchQuery, () => {
             <span>&#x2022;</span>
             <span>{{ formatTime(data.articles[5].publishedAt) }}</span>
           </div>
-          <a v-if="data?.articles?.[5]" :href="data.articles[5].url" rel="noopener noreferrer">
+          <a v-if="data?.articles?.[5]" :href="data.articles[5].url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(data.articles[5].url)">
             <h1 class="text-xl font-bold">{{ data.articles[5].title }}</h1>
           </a>
           <p class="text-sm text-gray-600 paragraph">{{ data.articles[5].description }}</p>
@@ -133,7 +133,7 @@ watch(searchQuery, () => {
       <!-- Bottom 4 Articles (under right block) -->
       <template v-for="(article, index) in data.articles.slice(6, 10)" :key="index">
         <div class="col-span-1 row-span-2 space-y-2 mb-6">
-          <a v-if="article" :href="article.url" rel="noopener noreferrer">
+          <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
             <img :src="article.urlToImage" class="rounded-xl w-full h-32 object-cover">
           </a>
           <div class="flex text-xs text-gray-400 space-x-2 mt-2">
@@ -142,7 +142,7 @@ watch(searchQuery, () => {
             <span>{{ formatTime(article.publishedAt) }}</span>
           </div>
           <div class="space-y-1.5">
-            <a v-if="article" :href="article.url" rel="noopener noreferrer">
+            <a v-if="article" :href="article.url" rel="noopener noreferrer" target="_blank" @click="saveReadListToLocalStorage(article)">
               <h1 class="text-lg font-bold title">{{ article.title }}</h1>
             </a>
             <p class="text-sm text-gray-600 paragraph">{{ article.description }}</p>
